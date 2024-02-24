@@ -41,6 +41,13 @@ export default function Signup() {
     data.acquisition = acquisitionChannel;
 
     console.log(data);
+
+    // In this handleSubmit function, we're getting this event object
+    // The target of this event object is the underlying form element
+    // And this form element has a reset method which we can call
+    // which is same thing when we set a button inside form to type='reset'
+    // so calling reset on event target is another way of clearing the form!
+    // event.target.reset();
   }
 
   return (

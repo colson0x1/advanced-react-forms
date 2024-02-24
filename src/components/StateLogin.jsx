@@ -15,6 +15,10 @@ export default function Login() {
     console.log('Submitted!');
 
     console.log(enteredValues);
+    setEnteredValues({
+      email: '',
+      password: '',
+    });
   }
 
   // also needs identifier of the input for which the event occurred when using

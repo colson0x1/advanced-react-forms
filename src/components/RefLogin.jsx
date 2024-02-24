@@ -22,7 +22,20 @@ export default function Login() {
     // complex forms and we have to setup and connect all those refs step by step
     // which can be quite some work if we're dealing with multiple input elements.
 
+    // But this is a solution we should use with care because typically we should
+    // leave up to React to update the DOM and we should not imperatively perform
+    // updates or changes as we're doing it here.
+    // It might be just a small update but it is an update to the DOM and
+    // therefore not really recommended!
+    /*
     email.current.value = '';
+    password.current.value = '';
+*/
+
+    // Instead here when working with Refs, its typically better to reset the
+    // form as we can also do it when using that Form Data approach for extracting
+    // the values
+    // Calling reset on event target is another way of clearing the form!
   }
 
   return (
