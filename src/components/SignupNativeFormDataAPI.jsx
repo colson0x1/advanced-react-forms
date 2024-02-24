@@ -1,4 +1,8 @@
+import { useState } from 'react';
+
 export default function Signup() {
+  const [passwordsAreNotEqual, setPasswordsAreNotEqual] = useState(false);
+
   function handleSubmit(event) {
     // make sure automatically generated http request is not being sent
     event.preventDefault();
@@ -40,6 +44,16 @@ export default function Signup() {
     // aquisition input
     data.acquisition = acquisitionChannel;
 
+    // the name prop has password in the input element
+    // since confirm password has - in the mid. dot notation wont work
+    // like data.confirm-password won't work becasue dash - is invalid character
+    // so we have to use bracket notation
+    // like data['confirm-password']
+    if (data.password !== data['confirm-password']) {
+      setPasswordsAreNotEqual(true);
+      return;
+    }
+
     console.log(data);
 
     // In this handleSubmit function, we're getting this event object
@@ -80,6 +94,9 @@ export default function Signup() {
             name='confirm-password'
             required
           />
+          <div className='control-error'>
+            {passwordsAreNotEqual && <p>Passwords must match.</p>}
+          </div>
         </div>
       </div>
 
