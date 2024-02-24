@@ -32,6 +32,9 @@ export default function Login() {
     event.preventDefault();
     console.log('Submitted!');
 
+    // perform submission validation here ...
+    // ...
+
     console.log(enteredValues);
     setEnteredValues({
       email: '',
