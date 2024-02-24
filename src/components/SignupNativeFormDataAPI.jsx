@@ -2,6 +2,45 @@ export default function Signup() {
   function handleSubmit(event) {
     // make sure automatically generated http request is not being sent
     event.preventDefault();
+
+    // the browser actually helps us with handling the form submission and
+    // getting hold of all the entered values.
+    // It helps us by allowing us to create a special kind of object based
+    // on a special kind of constructor function that's built into the browser,
+    // the FormData constructor function.
+    // FormData is an object that makes it easy to get hold of the different values
+    // entered into a form.
+    // all those inputs or other fields we want to extract must have a name prop
+    // to get access to that input value
+    const fd = new FormData(event.target);
+
+    // multi value input fields like checkbox are lost when using entries() fromEntries.
+    // But we can easily get them back by manually extracting and storing them.
+    // we use getAll() method if we want to get multiple values from one input field
+    // which we need if we have multiple checkboxes with same name and we want to get
+    // values of all checkboxes
+    const acquisitionChannel = fd.getAll('acquisition');
+
+    // const enteredEmail = fd.get('email');
+    // const enteredPassword = fd.get('password');
+    // That way we would end up with quite a lot of code here
+    // Therefore A common pattern thats often used to quickly get hold of
+    // all the entered values and group them together into an object is to use an
+    // built in Object class provided by browser and call fromEntries() static
+    // method on that class and pass the result of calling the entries() on that
+    // form date object to object from entries.
+    // Calling entries() on Form Data Object will gives us an array of all the input
+    // fields and their values
+    // And calling object from entries on that array will simply gives us an object
+    // where we've key value pairs for all our input fields!
+    const data = Object.fromEntries(fd.entries());
+    // we could merge that acquisitionChannel on this data object by adding a new
+    // property to it which could be called acquisition or like that
+    // acquisitionChannel will be an array of all the values selected by the
+    // aquisition input
+    data.acquisition = acquisitionChannel;
+
+    console.log(data);
   }
 
   return (
